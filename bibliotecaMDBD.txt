@@ -1,0 +1,87 @@
+CREATE DATABASE biblioteca;
+
+CREATE TABLE CLIENTE (
+    codCli int PRIMARY KEY AUTO_INCREMENT,
+    nome varchar(150),
+    telefone int,
+    turma varchar(150),
+    email varchar(150) unique,
+    dataNascimento date,
+    ra int unique);
+
+CREATE TABLE bibliotecario (
+    codFunc int PRIMARY KEY AUTO_INCREMENT,
+    logradouro varchar(255),
+    num int,
+    complemento varchar(255),
+    bairro varchar(255),
+    cidade varchar(255),
+    uf char(2),
+    cep varchar(255),
+    email varchar(255),
+    nome varchar(255),
+    cpf varchar(255),
+    telefone int,
+    dataNascimento date,
+    rg varchar(255));
+
+CREATE TABLE livro (
+    cidLivro int PRIMARY KEY AUTO_INCREMENT,
+    titulo varchar(150),
+    autor varchar(150),
+    genero varchar(150),
+    editora varchar(150));
+
+CREATE TABLE emprestimo_devolucao (
+    codEmp int PRIMARY KEY AUTO_INCREMENT,
+    data_devolucao date,
+    data_emprestimo date,
+    codCli int,
+    cidLivro int,
+    codFunc int,
+    FOREIGN KEY(codCli) REFERENCES cliente (codCli),
+    FOREIGN KEY(cidLivro) REFERENCES livro (cidLivro),
+    FOREIGN KEY(codFunc) REFERENCES bibliotecario (codFunc));
+
+INSERT INTO bibliotecario (logradouro, num, complemento, bairro, cidade, uf, cep, email, nome, cpf, telefone, dataNascimento, rg) VALUES
+('Rua','465','','Parque 10 de Novembro','Manaus','AM','69050-250','matheusmoselli@gmail.com','Joana Cláudia Jr','798.179.280-04','905584951','2000-08-30','49.117.859-1'),
+('Rua','15','apto 5','Vila Nova Suissa','Ribeirão Pires','SP','97812-620','mamamoselli@hotmail.com','Matheus Foresto Moselli','234.345.456.67','974839005','2004-05-13','30.744.240-8'),
+('Rua','864','','Moranguetes','Mauá','SP','09421-540','mat.moselli@hotmail.com','Cleber Machado','121.186.248.80','973684812','1987-06-06','23.412.598-6');
+
+INSERT INTO cliente (nome, telefone, turma, email, dataNascimento, ra) VALUES
+('Rodger Toledo','923456789','1A','rodgerdamassa@bol.com.br','2005-12-12','20024'),
+('Bia Franciscana','954225479','2F','biaprincess@gmail.com','2004-04-15','19035'),
+('Lais Ferreira','917955716','3A','laismalvadahaha@outlook.com','2003-05-07','18064');
+
+INSERT INTO cliente (nome, telefone, turma, email, dataNascimento, ra) VALUES
+('Fulano Talisto','974864165','1A','fulano.amigo@hotmail.com','1975-0546','19505'),
+('Thiago Yoda','974585157','2A','thiagasso@hotmail.com','2005-10-10','19520'),
+('Victor Lever','987515480','3A','victor.designer@hotmail.com','1990-01-05','19057'),
+('Lindia Fagundes','900000000','1C','lindia.escritora@outlook.com','2006-12-10','19781'),
+('Montalvao Back','912345678','2C','montalvao.oficial@hotmail.com','1900-10-05','20489'),
+('Aluno Famoso','916517651','3C','aluno.exemplar@outlook.com','2004-06-07','20962'),
+('Leandro Silva','971564215','3B','leandrao.melhor@outlook.com','2004-06-07','20144');
+
+INSERT INTO livro (titulo, autor, genero, editora) VALUES
+('Sword Art Online Aincrad','Reki Kawahara','Romance','Panini Books'),
+('Sob o ceu escarlate','Mark Sullivan','Romance','Planeta'),
+('Petrus Logus o guardiao do tempo','Augusto Cury','Aventura','Saraiva'),
+('Star Wars Marcas da Guerra','Chuck Wendig','Ação','Aleph'),
+('Assassins Creed Bandeira negra','Oliver bowden','Ação','Galera'),
+('Herobrine a lenda Pac e Mike','Pac e Mike','Aventura','Geracao Jovem'),
+('Percy Jackson e os olimpianos o ladrao de raios','Rick Riordan','Aventura','Intrínseca'),
+('Percy Jackson e os olimpianos o mar de monstros','Rick Riordan','Aventura','Intrínseca'),
+('Percy Jackson e os olimpianos a maldicao do tita','Rick Riordan','Aventura','Intrínseca'),
+('Como treinar o seu dragao','Cressida Cowell','Aventura','Intrínseca');
+
+INSERT INTO emprestimo_devolucao ( data_devolucao, data_emprestimo, codCli, cidLivro, codFunc) VALUES
+('2020-02-15','2020-02-01','1','1','1'),
+('2020-05-20','2020-03-04','2','2','2'),
+('2019-12-01','2019-06-14','3','3','2'),
+('2018-10-13','2015-10-13','4','4','2'),
+('2019-12-05','2019-06-14','5','5','1'),
+('2019-06-04','2019-04-06','6','6','1'),
+('2019-07-03','2019-05-08','7','7','1'),
+('2018-06-04','2018-05-04','8','8','2'),
+('2020-10-20','2020-05-10','9','9','1'),
+('2020-04-03','2020-01-30','10','10','2');
