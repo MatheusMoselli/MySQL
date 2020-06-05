@@ -85,3 +85,17 @@ INSERT INTO emprestimo_devolucao ( data_devolucao, data_emprestimo, codCli, cidL
 ('2018-06-04','2018-05-04','8','8','2'),
 ('2020-10-20','2020-05-10','9','9','1'),
 ('2020-04-03','2020-01-30','10','10','2');
+
+alter table livro add column paginas int;
+alter table livro add column qntdExemplares int;
+
+UPDATE livro set paginas = 221, qntdExemplares = 5 WHERE cidLivro = 10;
+UPDATE livro SET paginas = 238, qntdExemplares = 6 WHERE cidLivro = 1;
+UPDATE livro SET paginas = 413, qntdExemplares = 1 WHERE cidLivro = 2;
+UPDATE livro SET paginas = 290, qntdExemplares = 2 WHERE cidLivro = 3;
+UPDATE livro SET paginas = 378, qntdExemplares = 10 WHERE cidLivro = 4;
+UPDATE livro SET paginas = 331, qntdExemplares = 3 WHERE cidLivro = 5;
+UPDATE livro SET paginas = 215, qntdExemplares = 10 WHERE cidLivro = 6;
+UPDATE livro SET paginas = 387, qntdExemplares = 1 WHERE cidLivro = 7;
+UPDATE livro SET paginas = 286, qntdExemplares = 3 WHERE cidLivro = 8;
+UPDATE livro SET paginas = 316, qntdExemplares = 2 WHERE cidLivro = 9;
