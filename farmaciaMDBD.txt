@@ -1,0 +1,72 @@
+create database farmacia;
+
+use farmacia;
+
+CREATE TABLE caixa (
+codAtend int PRIMARY KEY AUTO_INCREMENT,
+nome varchar(150),
+cpf varchar(15) UNIQUE,
+rg varchar(15) UNIQUE,
+salario decimal(7,2),
+telFixo varchar(150),
+telCel varchar(150),
+email varchar(150) UNIQUE );
+
+CREATE TABLE produto_remedio (
+codProd int PRIMARY KEY AUTO_INCREMENT,
+preco decimal(7,2),
+nome varchar(150),
+qntd int,
+generico bit,
+fabricante varchar(150));
+
+CREATE TABLE compra_venda (
+codComp int PRIMARY KEY AUTO_INCREMENT,
+cpf varchar(150),
+data date,
+hora time,
+total decimal(7,2),
+codAtend int,
+FOREIGN KEY(codAtend) REFERENCES caixa (codAtend));
+
+CREATE TABLE itensCompra (
+totalUnit decimal(7,2),
+qntd int,
+codComp int,
+codProd int,
+FOREIGN KEY(codComp) REFERENCES compra_venda (codComp),
+FOREIGN KEY(codProd) REFERENCES produto_remedio (codProd));
+
+INSERT INTO caixa (nome, cpf, rg, salario, telFixo, telCel, email) VALUES
+('Luciana Francisca','064.750.783-87','445.317.942',1000.99,'2832-4497','99127-8018','lucianafracisca@gmail.com'),
+('Vinicius Erick','625.993.001-18','342.676.386',1200.99,'3885-0481','98545-5959','vinicius.erick@hotmail.com'),
+('Ester Beatriz','107.563.522-58','104.304.698',1000.99,'3668-8440','99196-6266','esterbeatriz@gmail.com');
+
+insert into produto_remedio(preco, nome, qntd, generico, fabricante) VALUES
+(26.25,'Acebrofilina',50,0,'Biosintética'),
+(98.69,'Bissulfato de Clorpidogrel',20,1,'Biolab Farma Genericos'),
+(19.60,'Sulpan',70,1,'Sanofi-aventis'),
+(37.21,'Desloratina',50,0,'Aché S Farmacêuticos S.A'),
+(24.17,'Eduxabana',70,1,'Daiichi Sankyo Brasil'),
+(5613.32,'Elotuzumabe',2,0,'Bristol-Myers Squibb'),
+(74.27,'Enoxaparina Sódica',50,1,'Cristália Químico'),
+(56.40,'Genfibrozila',20,1,'Wyeth'),
+(139.95,'Glicose',20,0,'Beker Fármaco Hospitalares'),
+(12.96,'Palmitato',70,0,'Brainfarma Química e S.A');
+
+
+INSERT INTO compra_venda(cpf,data,hora,total,codAtend) VALUES
+('456.321.852-49','2020-06-19','13:55:00',148.92,2);
+
+insert into itenscompra(qntd,totalUnit,codComp,codProd) VALUES
+(2,39.2,1,3),
+(1,37.21,1,4),
+(3,72.51,1,5);
+
+INSERT INTO compra_venda(cpf,data,hora,total,codAtend) VALUES
+('545-123-788-33','2019-02-10','23:55:00',178.61,1);
+
+insert into itenscompra(qntd,totalUnit,codComp,codProd) VALUES
+(4,51.84,2,10),
+(1,74.27,2,7),
+(2,52.5,2,1);
