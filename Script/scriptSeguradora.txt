@@ -1,0 +1,40 @@
+CREATE TABLE Cliente (
+codCli int PRIMARY KEY auto_increment,
+nome varchar(150),
+telefone varchar(150),
+rg varchar(150) unique,
+email varchar(150) unique,
+dataNascimento date,
+cpf varchar(150) unique,
+num varchar(150),
+logradouro varchar(150),
+compl varchar(150),
+bairro varchar(150),
+cidade varchar(150),
+cep varchar(150),
+uf char(2)
+)
+
+CREATE TABLE CarrosAssegurados (
+codCarro int PRIMARY KEY auto_increment,
+modelo varchar(50),
+marca varchar(50),
+chassi varchar(25),
+cor varchar(50),
+porte varchar(20),
+placa varchar(20),
+ano int,
+codCli int,
+FOREIGN KEY(codCli) REFERENCES Cliente (codCli)
+)
+
+CREATE TABLE Ocorrencia (
+codOco int PRIMARY KEY auto_increment, 
+data date,
+cidade varchar(150),
+descricao varchar(250),
+sinistro varchar(150),
+motivo varchar(150),
+codCarro int,
+FOREIGN KEY(codCarro) REFERENCES CarrosAssegurados (codCarro)
+)
